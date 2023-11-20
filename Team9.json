@@ -1,0 +1,931 @@
+{
+	"info": {
+		"_postman_id": "4bba73e8-c087-44b9-aa79-ba836b7676d1",
+		"name": "Team9_DieticianAPI_Hackathon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28520097",
+		"_collection_link": "https://warped-crescent-671220.postman.co/workspace/Team9_Dietician_API_Hackathon~0f9d69af-551e-43bb-89e8-b180be2c0f23/collection/23003850-4bba73e8-c087-44b9-aa79-ba836b7676d1?action=share&source=collection_link&creator=28520097"
+	},
+	"item": [
+		{
+			"name": "Patient",
+			"item": [
+				{
+					"name": "Get_Test_Reports",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"fileName\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"morbidConditionStr\")\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/patient/testReports/3061",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient",
+								"testReports",
+								"3061"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add_Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo ",
+									"value": "{ \"FirstName\": \"{{FirstName}}\", \"LastName\": \"{{LastName}}\", \"ContactNumber\": \"{{ContactNumber}}\", \"Email\": \"{{Email}}\", \"Allergy\": \"{{Allergy}}\", \"FoodCategory\": \"{{FoodCategory}}\", \"DateOfBirth\": \"{{DateOfBirth}}\" }",
+									"type": "text"
+								},
+								{
+									"key": "file",
+									"type": "file",
+									"src": "qN6PUNwec/Diabetic and Hemogram Test_Thyrocare lab.pdf (1).pdf"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/patient",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get_All_Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"FirstName\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"LastName\");\r",
+									"pm.expect(pm.response.text()).to.include(\"Email\");\r",
+									"pm.expect(pm.response.text()).to.include(\"Allergy\");\r",
+									"pm.expect(pm.response.text()).to.include(\"FoodCategory\");\r",
+									"});\r",
+									"var schema = {\r",
+									"    \"$schema\": \"https://json-schema.org/draft/2019-09/schema\",\r",
+									"    \"$id\": \"http://example.com/example.json\",\r",
+									"    \"type\": \"object\",\r",
+									"    \"default\": {},\r",
+									"    \"title\": \"Root Schema\",\r",
+									"    \"required\": [\r",
+									"        \"FirstName\",\r",
+									"        \"LastName\",\r",
+									"        \"ContactNumber\",\r",
+									"        \"Email\",\r",
+									"        \"Allergy\",\r",
+									"        \"FoodCategory\",\r",
+									"        \"DateOfBirth\"\r",
+									"    ],\r",
+									"    \"properties\": {\r",
+									"        \"FirstName\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"default\": \"\",\r",
+									"            \"title\": \"The FirstName Schema\",\r",
+									"            \"examples\": [\r",
+									"                \"String\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"LastName\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"default\": \"\",\r",
+									"            \"title\": \"The LastName Schema\",\r",
+									"            \"examples\": [\r",
+									"                \"String\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"ContactNumber\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"default\": \"\",\r",
+									"            \"title\": \"The ContactNumber Schema\",\r",
+									"            \"examples\": [\r",
+									"                \"Integer\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"Email\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"default\": \"\",\r",
+									"            \"title\": \"The Email Schema\",\r",
+									"            \"examples\": [\r",
+									"                \"String\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"Allergy\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"default\": \"\",\r",
+									"            \"title\": \"The Allergy Schema\",\r",
+									"            \"examples\": [\r",
+									"                \"String\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"FoodCategory\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"default\": \"\",\r",
+									"            \"title\": \"The FoodCategory Schema\",\r",
+									"            \"examples\": [\r",
+									"                \"String\"\r",
+									"            ]\r",
+									"        },\r",
+									"        \"DateOfBirth\": {\r",
+									"            \"type\": \"string\",\r",
+									"            \"default\": \"\",\r",
+									"            \"title\": \"The DateOfBirth Schema\",\r",
+									"            \"examples\": [\r",
+									"                \"YYYY-MM-DD\"\r",
+									"            ]\r",
+									"        }\r",
+									"    },\r",
+									"    \"examples\": [{\r",
+									"        \"FirstName\": \"String\",\r",
+									"        \"LastName\": \"String\",\r",
+									"        \"ContactNumber\": \"Integer\",\r",
+									"        \"Email\": \"String\",\r",
+									"        \"Allergy\": \"String\",\r",
+									"        \"FoodCategory\": \"String\",\r",
+									"        \"DateOfBirth\": \"YYYY-MM-DD\"\r",
+									"    }]\r",
+									"}\r",
+									"var schema = {\r",
+									"    \"items\": {\r",
+									"        \"type\": \"String\"\r",
+									"    }\r",
+									"};\r",
+									"\r",
+									"var data1 = [true, false];\r",
+									"var data2 = [true, false];\r",
+									"\r",
+									"pm.test('schema is valid', function () {\r",
+									"    pm.expect(tv4.validate(data1, schema)).to.be.false;\r",
+									"    pm.expect(tv4.validate(data2, schema)).to.be.false;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/patient",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete_Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);})\r",
+									"    "
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/patient/4015",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient",
+								"4015"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete_Patient",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/patient/112",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"patient",
+										"112"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Report-To",
+									"value": "{\"group\":\"heroku-nel\",\"max_age\":3600,\"endpoints\":[{\"url\":\"https://nel.heroku.com/reports?ts=1700083900&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=GV4XntXhSXE32d3FMJhMjiPvHjIDxoRPSez9EgwUNPs%3D\"}]}"
+								},
+								{
+									"key": "Reporting-Endpoints",
+									"value": "heroku-nel=https://nel.heroku.com/reports?ts=1700083900&sid=c46efe9b-d3d2-4a0c-8c76-bfafa16c5add&s=GV4XntXhSXE32d3FMJhMjiPvHjIDxoRPSez9EgwUNPs%3D"
+								},
+								{
+									"key": "Nel",
+									"value": "{\"report_to\":\"heroku-nel\",\"max_age\":3600,\"success_fraction\":0.005,\"failure_fraction\":0.05,\"response_headers\":[\"Via\"]}"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Method"
+								},
+								{
+									"key": "Vary",
+									"value": "Access-Control-Request-Headers"
+								},
+								{
+									"key": "X-Content-Type-Options",
+									"value": "nosniff"
+								},
+								{
+									"key": "X-Xss-Protection",
+									"value": "1; mode=block"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, no-store, max-age=0, must-revalidate"
+								},
+								{
+									"key": "Pragma",
+									"value": "no-cache"
+								},
+								{
+									"key": "Expires",
+									"value": "0"
+								},
+								{
+									"key": "Strict-Transport-Security",
+									"value": "max-age=31536000 ; includeSubDomains"
+								},
+								{
+									"key": "X-Frame-Options",
+									"value": "DENY"
+								},
+								{
+									"key": "Content-Type",
+									"value": "text/plain;charset=UTF-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 15 Nov 2023 21:31:39 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "Patient with Id 112 deleted Successfully!"
+						}
+					]
+				},
+				{
+					"name": "Update_Patient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);})"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{ \"FirstName\": \"Ram\",  \"LastName\": \"Ragav\", \"ContactNumber\": \"5347576621\", \"Email\": \"Harry.42r@gmail.com\", \"Allergy\": \"Milk\",  \"FoodCategory\": \"Jain\", \"DateOfBirth\": \"1982-09-02\" }",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/patient/3562",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient",
+								"3562"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET_File_ID",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/patient/testReports/viewFile/65582a57aac32757c089b7d5",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient",
+								"testReports",
+								"viewFile",
+								"65582a57aac32757c089b7d5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Morbidity",
+			"item": [
+				{
+					"name": "Get All morbidity",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"morbidityTestId\");});\r",
+									"\r",
+									"pm.test(\"Content-Type is application/json\", function () {\r",
+									"    pm.response.to.have.header(\"Content-Type\");\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/morbidity",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"morbidity"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Morbidity_by_test_name",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"morbidityTestId\");});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/morbidity/HbA1c",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"morbidity",
+								"HbA1c"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Negative_scenarios",
+			"item": [
+				{
+					"name": "Without Login Credentials",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/patient",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Posting invalid data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{\"FirstName\": \"John\", \"LastName\": \"Dough\", \"ContactNumber\": \"8092875555\", \"Email\": \"testpatientInfo@test.com\", \"Allergy\": \"patientInfoAllergyEdit\", \"FoodCategory\": \"EGGETARIAN\", \"DateOfBirth\": \"2000-02-03\"}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/patient",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Updating Invalid data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientInfo",
+									"value": "{ \"FirstName\": \"Tom\",  \"LastName\": \"Carry\", \"ContactNumber\": \"6356569631\", \"Email\": \"Harry.42r@gmail.com\", \"Allergy\": \"Milk\",  \"FoodCategory\": \"Jain\", \"DateOfBirth\": \"1979-08-22\" }",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/patient/patientId/113",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient",
+								"patientId",
+								"113"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Request with invalid data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientId",
+									"value": "980",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}}/patient/980",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient",
+								"980"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Morbidity details with invalid data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "patientId",
+									"value": "678",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseUrl}} /patient/testReports/{patientId}",
+							"host": [
+								"{{baseUrl}} "
+							],
+							"path": [
+								"patient",
+								"testReports",
+								"{patientId}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Retrieve Patient File with invalid data",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/patient/testReports/viewFile/100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"patient",
+								"testReports",
+								"viewFile",
+								"100"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User_login",
+			"item": [
+				{
+					"name": "User_login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"// pm.environment.set(\" Token\" , pm.response.json().token)\r",
+									"\r",
+									"//pm.globals.set(\"Token2\",pm.response.json().token);\r",
+									"pm.environment.set(\"Token2\",pm.response.json().token);\r",
+									"//pm.collectionVariables.set(\"variable_key\", \"variable_value\");"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"password\": \"Bumpy23\",\r\n  \"userLoginEmail\": \"reddy.lavi29@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/login",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User_Logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token2}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/logoutdietician",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"logoutdietician"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJyZWRkeS5sYXZpMjlAZ21haWwuY29tIiwiaWF0IjoxNzAwMDU4ODE4LCJleHAiOjE3MDAwODc2MTh9.lDgWcxXL7b_Waak5W8ZgaTw0KN5YT-lMwvcpB8Noux0AsCpbpquMuccx5hDriPrHqppiCT4YFfMcFa0kozabOg",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "anyvalue",
+			"type": "string"
+		}
+	]
+}
