@@ -927,6 +927,17 @@
 			"item": [
 				{
 					"name": "Patient_login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.environment.set(\"PToken\",pm.response.json().token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -942,7 +953,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"password\": \"test\",\r\n  \"userLoginEmail\": \"sairam.123@gmail.com\"\r\n}",
+							"raw": "{\r\n  \"password\": \"test\",\r\n  \"userLoginEmail\": \"SRU69@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -963,13 +974,30 @@
 				},
 				{
 					"name": "PatientTestreport",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    pm.expect(pm.response.text()).to.include(\"fileName\");\r",
+									"    pm.expect(pm.response.text()).to.include(\"morbidConditionStr\")\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{Token2}}",
+									"value": "{{PToken}}",
 									"type": "string"
 								}
 							]
@@ -992,13 +1020,26 @@
 				},
 				{
 					"name": "FileofaPatient",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "{{Token2}}",
+									"value": "{{PToken}}",
 									"type": "string"
 								}
 							]
